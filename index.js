@@ -65,7 +65,13 @@ client.on('message', async (msg) => {
       case '!sticker':
         if(msg.hasMedia){
           const media = await msg.downloadMedia();
-          chat.sendMessage(media, { sendMediaAsSticker: true });
+          chat.sendMessage(media,
+            {
+              sendMediaAsSticker: true,
+              stickerName: 'Sticker',
+              stickerAuthor: client.info.pushname
+            }
+          );
           console.log(chalk.green(`⬆ ${contact.pushname} : Send sticker.\n`));
         } else {
           msg.reply('_Send image with caption !sticker_');
