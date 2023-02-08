@@ -29,9 +29,9 @@
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "chalk": "^5.2.0",
     "fluent-ffmpeg": "^2.1.2",
+    "forever": "^4.0.3",
     "qrcode-terminal": "^0.12.0",
     "spinnies": "^0.5.1",
-    "whatsapp-web.js": "^1.18.4",
-    "forever": "^4.0.3"
+    "whatsapp-web.js": "^1.19.3"
   }
 }
