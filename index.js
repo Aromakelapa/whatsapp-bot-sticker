@@ -19,6 +19,14 @@ const client = new Client({
 
 console.log(chalk.green('\n[🤖] Simple WhatsApp Bot Sticker by Aromakelapa\n'));
 
+spinnies.add('Opening', { text: 'Opening Whatsapp Web'});
+
+client.on('loading_screen', (percent, message) => {
+  spinnies.succeed('Opening', { text: 'Whatsapp Web Opened'});
+  // console.log('', percent, message);
+  spinnies.add('Connecting', { text: `Connecting. ${message} ${percent}%`});
+});
+
 // On Login
 client.on('qr', (qr) => {
   spinnies.add('generateQr', {text: 'Generating QR Code'});
@@ -27,7 +35,6 @@ client.on('qr', (qr) => {
   spinnies.succeed('generateQr', {text: 'QR Code Generated'});
 });
 
-spinnies.add('Connecting', { text: 'Connecting'});
 
 // Authenticated
 client.on('authenticated', () => {
