@@ -29,10 +29,12 @@ client.on('loading_screen', (percent, message) => {
 
 // On Login
 client.on('qr', (qr) => {
+  spinnies.succeed('Opening', { text: 'Whatsapp Web Opened'});
   spinnies.add('generateQr', {text: 'Generating QR Code'});
   console.log(chalk.yellow('[!] Scan QR Code Bellow'));
   qrcode.generate(qr, {small: true});
   spinnies.succeed('generateQr', {text: 'QR Code Generated'});
+  spinnies.add('Connecting', { text: `Connecting. ${message} ${percent}%`});
 });
 
 
