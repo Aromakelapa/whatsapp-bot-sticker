@@ -17,30 +17,31 @@ const client = new Client({
 	}
 });
 
-console.log(chalk.green('\n[🤖] Simple WhatsApp Bot Sticker by Aromakelapa\n'));
+console.log(chalk.green('\n🤖 Simple WhatsApp Bot Sticker by Aromakelapa\n'));
 
-spinnies.add('Connecting', { text: 'Opening Whatsapp Web'});
+// Init Bot
+client.initialize();
+
+spinnies.add('Connecting', { text: 'Opening Whatsapp Web' })
 
 client.on('loading_screen', (percent, message) => {
-  spinnies.update('Connecting', { text: 'Whatsapp Web Opened'});
   // console.log('', percent, message);
   spinnies.update('Connecting', { text: `Connecting. ${message} ${percent}%`});
 });
 
 // On Login
 client.on('qr', (qr) => {
-  spinnies.succeed('Connecting', { text: 'Whatsapp Web Opened'});
   spinnies.add('generateQr', {text: 'Generating QR Code'});
   console.log(chalk.yellow('[!] Scan QR Code Bellow'));
   qrcode.generate(qr, {small: true});
   spinnies.succeed('generateQr', {text: 'QR Code Generated'});
-  spinnies.add('Connecting', { text: 'Waiting to Scan' })
+  spinnies.update('Connecting', { text: 'Waiting to scan' })
 });
-
 
 // Authenticated
 client.on('authenticated', () => {
-  console.log(chalk.green('Authenticated!'));
+  // spinnies.update('Connecting', {text: ''});
+  console.log(chalk.green(`✓ Authenticated!                          `))
 });
 
 // Auth Failure
@@ -54,29 +55,29 @@ client.on('ready', () => {
   aboutClient(client);
   console.log('Incoming Messages : \n');
 });
-
 // Messages Handler
 client.on('message', async (msg) => {
   const chat = await msg.getChat();
   const contact = await msg.getContact();
-  console.log(`⬇️ ${contact.pushname} : ${msg.body}\n`);
+  console.log(chalk.cyan(`💬 ${contact.pushname} : ${msg.body}\n`));
 
   try {
     switch (msg.body.toLowerCase()) {
       case '!stiker':
       case '!sticker':
+      case 'st':
         if(msg.hasMedia){
           const media = await msg.downloadMedia();
           chat.sendMessage(media,
             {
               sendMediaAsSticker: true,
-              stickerName: 'Sticker',
-              stickerAuthor: client.info.pushname
+              stickerName: 'github.com/Aromakelapa',
+              stickerAuthor: '/whatsapp-bot-sticker'
             }
           );
-          console.log(chalk.green(`⬆ ${contact.pushname} : Send sticker.\n`));
+          console.log(chalk.green(`💬 ${contact.pushname} : Sticker sent!\n`));
         } else {
-          msg.reply('_Send image with caption !sticker_');
+          msg.reply('Send image with caption !sticker');
         };
         break;
       case '!error':
@@ -89,19 +90,16 @@ client.on('message', async (msg) => {
   };
 });
 
-// Init Bot
-client.initialize();
-
 // Disconnected
 client.on('disconnected', (reason) => {
   console.log('Client was logged out, Reason : ', reason);
 });
 
 function aboutClient(client){
-  console.log(                                                                                                                                                  
+  console.log(chalk.cyan(                                                                                                                                                  
     '\nAbout Client :' +                                                                                                                                     
     '\n  - Username : ' + client.info.pushname +                                                                                                           
-    '\n  - Phone Number : ' + client.info.wid.user +                                                                                                       
+    '\n  - Phone    : ' + client.info.wid.user +                                                                                                       
     '\n  - Platform : ' + client.info.platform + '\n'
-  );
+  ));
 };
