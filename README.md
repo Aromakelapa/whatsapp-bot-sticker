@@ -23,4 +23,20 @@ npm start
 ```
 
 
-## For more features, try my bot [here!](https://wa.me/6285942361411)
+## For more features, try my bot [here!](https://wa.me/6285942361411) Which features :
+- Sticker to Images.
+- Image to Sticker.
+- Facebook video downloader.
+- TikTok video downloader.
+- YouTube to MP3.
+- YouTube to MP4.
+- Image Background Remover.
+- Image Enhancer.
+- Encrypt text to Base64 strings.
+- Decrypt Base64 strings to text.
+- Forward Message.
+- URL Shortener.
+- ChatGPT OpenAI.
+- etc.
+
+## i sell the script, and also can create your custom bot, just contact [me here!](https://wa.me/6283809574979)
