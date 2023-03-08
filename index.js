@@ -3,14 +3,16 @@ import WAWebJS from "whatsapp-web.js";
 import qrcode from 'qrcode-terminal'
 import Spinnies from "spinnies";
 import chalk from 'chalk';
-import fs from 'fs';
 
 const spinnies = new Spinnies();
 const ffmpegPath = FfmpegPath.path;
 const { Client, LocalAuth } = WAWebJS;
 
 const client = new Client({
-  authStrategy: new LocalAuth(),
+  authStrategy: new LocalAuth({
+    clientId: "one",
+    dataPath: "./sessions",
+  }),
   ffmpegPath,
   puppeteer: {
 		args: ['--no-sandbox']
