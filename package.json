@@ -1,6 +1,6 @@
 {
   "name": "whatsapp-bot-sticker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple whatsapp bot sticker",
   "main": "index.js",
   "type": "module",
@@ -32,6 +32,6 @@
     "forever": "^4.0.3",
     "qrcode-terminal": "^0.12.0",
     "spinnies": "^0.5.1",
-    "whatsapp-web.js": "^1.19.4"
+    "whatsapp-web.js": "^1.22.1"
   }
 }
