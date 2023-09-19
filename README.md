@@ -23,7 +23,7 @@ npm start
 ```
 
 
-## For more features, try my bot [here!](https://wa.me/6285942361411) Which features :
+## [DEPRECATED BCZ NO VPS] For more features, try my bot [here!](https://wa.me/6285942361411) Which features :
 - Sticker to Images.
 - Image to Sticker.
 - Facebook video downloader.
@@ -39,4 +39,4 @@ npm start
 - ChatGPT OpenAI.
 - etc.
 
-## i sell the script, and also can create your custom bot, just contact [me here!](https://wa.me/6283809574979)
+## i sell the script, and also can create your custom bot, just contact [me here!](https://wa.me/6285942361411)
