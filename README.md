@@ -39,4 +39,4 @@ npm start
 - ChatGPT OpenAI.
 - etc.
 
-## i sell the script, and also can create your custom bot, just contact [me here!](https://wa.me/6285942361411)
+## I sell custom bot scripts, just contact [me here!](https://wa.me/6283809574979)
