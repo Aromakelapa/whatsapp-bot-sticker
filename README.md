@@ -24,9 +24,4 @@ npm start
 
 ## If had an issues with this repo, please open issue.
 
-## For more features, try my bot [here!](https://wa.me/6285942361411) Which features :
-- Image to Sticker, with command `.sticker`
-- Facebook video downloader, with command `.fbdl facebook-url-here`
-- Instagram video downloader, with command `.igdl instagram-url-here`
-
-## I sell custom bot scripts, just contact [me here!](https://wa.me/6283809574979)
+## I sell custom bot scripts, just contact [me here!](https://wa.me/6285860371993)
