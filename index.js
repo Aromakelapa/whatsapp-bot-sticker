@@ -3,10 +3,11 @@ import WAWebJS from "whatsapp-web.js";
 import qrcode from 'qrcode-terminal'
 import Spinnies from "spinnies";
 import chalk from 'chalk';
+import { instagram } from '@jerrycoder/instagram-api';
 
 const spinnies = new Spinnies();
 const ffmpegPath = FfmpegPath.path;
-const { Client, LocalAuth } = WAWebJS;
+const { Client, LocalAuth, MessageMedia } = WAWebJS;
 
 const client = new Client({
   authStrategy: new LocalAuth({
@@ -15,23 +16,21 @@ const client = new Client({
   }),
   ffmpegPath,
   puppeteer: {
+    executablePath: '/usr/bin/google-chrome-stable', // Replace with the path to your Chrome executable!
 		args: ['--no-sandbox']
 	}
 });
 
 console.log(chalk.green('\n🤖 Simple WhatsApp Bot Sticker by Aromakelapa\n'));
 
-// Init Bot
 client.initialize();
 
 spinnies.add('Connecting', { text: 'Opening Whatsapp Web' })
 
 client.on('loading_screen', (percent, message) => {
-  // console.log('', percent, message);
   spinnies.update('Connecting', { text: `Connecting. ${message} ${percent}%`});
 });
 
-// On Login
 client.on('qr', (qr) => {
   spinnies.add('generateQr', {text: 'Generating QR Code'});
   console.log(chalk.yellow('[!] Scan QR Code Bellow'));
@@ -40,24 +39,20 @@ client.on('qr', (qr) => {
   spinnies.update('Connecting', { text: 'Waiting to scan' })
 });
 
-// Authenticated
 client.on('authenticated', () => {
-  // spinnies.update('Connecting', {text: ''});
   console.log(chalk.green(`✓ Authenticated!                          `))
 });
 
-// Auth Failure
 client.on('auth_failure', (msg) => {
   console.error('Authentication Failure!', msg);
 });
 
-// Bot Ready
 client.on('ready', () => {
   spinnies.succeed('Connecting', { text: 'Connected!', successColor: 'greenBright' });
   aboutClient(client);
   console.log('Incoming Messages : \n');
 });
-// Messages Handler
+
 client.on('message', async (msg) => {
   const chat = await msg.getChat();
   const contact = await msg.getContact();
@@ -73,8 +68,8 @@ client.on('message', async (msg) => {
           chat.sendMessage(media,
             {
               sendMediaAsSticker: true,
-              stickerName: 'github.com/Aromakelapa',
-              stickerAuthor: '/whatsapp-bot-sticker'
+              stickerName: '',
+              stickerAuthor: contact.pushname
             }
           );
           console.log(chalk.green(`💬 ${contact.pushname} : Sticker sent!\n`));
@@ -87,12 +82,23 @@ client.on('message', async (msg) => {
         new Error();
         break;
     }
+
+    switch (true) {
+      case msg.body.startsWith('https://www.instagram.com/'):
+        try {
+          const ig = await instagram(msg.body);
+          const media = await MessageMedia.fromUrl(ig.url, { unsafeMime: true });
+          msg.reply(media);
+        } catch (error) {
+          msg.reply(error.message);
+        };
+        break;
+    }
   } catch (error) {
     console.error(error);
   };
 });
 
-// Disconnected
 client.on('disconnected', (reason) => {
   console.log('Client was logged out, Reason : ', reason);
 });

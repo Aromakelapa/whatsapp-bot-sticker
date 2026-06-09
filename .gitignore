@@ -4,3 +4,4 @@ sessions/
 log/*
 package-lock.json
 pnpm-lock.yaml
+.wwebjs_cache
